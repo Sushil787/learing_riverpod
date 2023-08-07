@@ -1,3 +1,4 @@
+import 'package:app_pod/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -56,8 +57,6 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Consumer(builder: (context, ref, child) {
-              print("build tigger");
-
               final value = ref.watch(counterProvider);
               return Text(
                 value.toString(),
@@ -69,7 +68,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(counterProvider.notifier).onDecreament();
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => const HomePage()));
+          // ref.read(counterProvider.notifier).onDecreament();
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
