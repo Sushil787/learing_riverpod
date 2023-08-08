@@ -1,15 +1,15 @@
 import 'dart:developer';
 
-import 'package:app_pod/model/post.dart';
+import 'package:app_pod/posts/model/post.dart';
 import 'package:dio/dio.dart';
 
 class FetchData {
   Future<List<Post>> fetchPost() async {
-    final data = await Dio().get("https://jsonplaceholder.typicode.com/posts");
+    final dio = Dio();
+    final data = await dio.get("https://jsonplaceholder.typicode.com/posts");
     // log(data.toString(), name: "all data");
     List<Post> posts = [];
 
-    log(data.statusCode.toString());
     if (data.statusCode == 200) {
       posts =
           (data.data as List<dynamic>).map((e) => Post.fromJson(e)).toList();

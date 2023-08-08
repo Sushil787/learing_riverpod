@@ -1,5 +1,6 @@
-import 'package:app_pod/model/post.dart';
-import 'package:app_pod/repo/data_repo.dart';
+
+import 'package:app_pod/posts/model/post.dart';
+import 'package:app_pod/posts/repo/data_repo.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final postRepoProvider = Provider<FetchData>(
