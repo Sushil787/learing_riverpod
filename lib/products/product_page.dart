@@ -1,5 +1,6 @@
 import 'package:app_pod/products/notifier/product_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ProductPage extends ConsumerStatefulWidget {
@@ -19,6 +20,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = ref.watch(productProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text("product page"),
@@ -52,13 +54,32 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                         style: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
                       Flexible(
-                        child: Image.network(
-                          product.images.first,
-                          fit: BoxFit.contain,
+                        child: SizedBox(
+                          height: 200,
+                          width: 400,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              ...product.images.map(
+                                (e) => Container(
+                                  height: 200,
+                                  width: 230,
+                                  margin:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                          e,
+                                        ),
+                                      ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  padding: const EdgeInsets.all(10),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       Text(
